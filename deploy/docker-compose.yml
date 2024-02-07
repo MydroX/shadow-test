@@ -1,0 +1,35 @@
+version: "3.3"
+services:
+  shadow-test:
+    image: mydrox/shadow-test:0.1.0
+    container_name: shadow-test
+    environment:
+      APP_ENV: dev
+    build: 
+      context: ../
+      dockerfile: deploy/Dockerfile
+    ports:
+      - 3000:3000
+    volumes: 
+      - ../.:/app
+    networks: 
+      - shadow-test
+    depends_on:
+      - shadow-test-postgres
+
+  shadow-test-postgres:
+    image: postgres:16.1-alpine3.19
+    container_name: shadow-test-postgres
+    volumes:
+      - postgres:/data/postgres
+    networks:
+      - shadow-test
+    ports:
+      - 5432:5432
+
+networks:
+  shadow-test:
+   external: true
+
+volumes:
+  postgres:
