@@ -21,11 +21,11 @@ func New() *gin.Engine {
 		}
 		players := v1.Group("/players")
 		{
-			// players.GET("/", controller.GetPlayers)
-			// players.GET("/:id", controller.GetPlayer)
+			players.GET("/", controller.GetPlayers)
+			players.GET("/:id", controller.GetPlayer)
 			players.POST("/create", controller.CreatePlayer)
-			// players.PUT("/:id/update", controller.UpdatePlayer)
-			// players.DELETE("/:id/delete", controller.DeletePlayer)
+			players.PUT("/:id/update", controller.UpdatePlayer)
+			players.DELETE("/:id/delete", controller.DeletePlayer)
 		}
 
 		v1.GET("/health", controller.HealthEndpoint)

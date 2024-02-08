@@ -21,6 +21,7 @@ func main() {
 	// Initialize logger
 	log.Logger = log.CreateLoggerDev()
 
+	// Initialize database and migrate models
 	postgres.InitDB()
 	err = postgres.Conn.AutoMigrate(&models.Team{}, &models.Player{})
 	if err != nil {
